@@ -33,8 +33,14 @@ jobs:
 
           # Python ライブラリをインストール
           pip install --upgrade pip
-          pip install selenium webdriver-manager requests slack_sdk jpholiday
+          pip install -r requirements.txt
 
       - name: Run scraping script
+        env:
+          CAMPANY_ID: ${{ secrets.CAMPANY_ID }}
+          LOGIN_ID: ${{ secrets.LOGIN_ID }}
+          LOGIN_PASS: ${{ secrets.LOGIN_PASS }}
+          SEND_USER_ID: ${{ secrets.SEND_USER_ID }}
+          SLACK_API: ${{ secrets.SLACK_API }}
         run: |
-          python actions.py "${{ secrets.CAMPANY_ID }}" "${{ secrets.LOGIN_ID }}" "${{ secrets.LOGIN_PASS }}" "${{ secrets.SEND_USER_ID }}" "${{ secrets.SLACK_API }}"
+          python actions.py
